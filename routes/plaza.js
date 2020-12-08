@@ -12,18 +12,18 @@ const Equipo=mongoose.model('Equipo');
 
  //Registro de datos
  router.post('/',(req, res)=> {
-   //res.json(req.body);
-   var newPlaza={
+
+   var newPlaza={//CREACION DE LA NUEVA PLAZA
     IdEquipo:req.body.IdEquipo,
     IdEsport:req.body.IdEsport,
     Posicion:req.body.Posicion,
     Disponible:req.body.Disponible
    }
-  //ESTUDIANTE ES EL MODELO Y LE PASAMOS LOS DATOS
+  //EQUIPOESPORT ES EL MODELO Y LE PASAMOS LOS DATOS
    var registro=new EquipoEsport(req.body);
     
   
-    Esport.findById(req.body.IdEsport).then((esports)=>{
+    Esport.findById(req.body.IdEsport).then((esports)=>{//SE REVISA QUE ESPORT EXISTA
       if(esports==null ){
       res.send("No existe el registro del esport");
     }else{
@@ -33,7 +33,7 @@ const Equipo=mongoose.model('Equipo');
 
     }
     });
-    Equipo.findById(req.body.IdEquipo).then((equipos)=>{
+    Equipo.findById(req.body.IdEquipo).then((equipos)=>{//SE REVISA QUE EL EQUIPO EXISTA
       if(equipos==null){
         res.send("No existe el registro del equipo");
       }else{
@@ -45,7 +45,7 @@ const Equipo=mongoose.model('Equipo');
      });
  
 
-   registro.save().then(()=>{
+   registro.save().then(()=>{//SE GUARDA EL REGISTRO EN LA BD
      console.log("Se ha matriculado");
      res.send("Se ha registrado exitosamente");
   }).catch((error)=>{
@@ -56,7 +56,7 @@ const Equipo=mongoose.model('Equipo');
    });
  });
  router.get('/',(req, res)=> {
-  //res.send('Metodo que lista los Jugadors');
+  //METODO QUE LISTA LAS PLAZAS
   EquipoEsport.find().then((plazas)=>{
      res.json(plazas);
    }).catch((error)=>{

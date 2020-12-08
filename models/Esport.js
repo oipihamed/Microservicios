@@ -1,7 +1,7 @@
 const moongose=require('mongoose');
 
 moongose.model('Esport',{
-        IdEsport:{
+        IdEsport:{//IDENTIFICADOR UNICO DEL ESPORT
             type:Number,
             require:true,
             unique:true

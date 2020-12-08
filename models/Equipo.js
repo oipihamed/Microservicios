@@ -1,12 +1,12 @@
 const moongose=require('mongoose');
 
 moongose.model('Equipo',{
-        IdEquipo:{
+        IdEquipo:{//IDENTIFICADOR UNICO DEL EQUIPO
             type:Number,
             require:true,
             unique:true
         },
-        Nombre:{
+        Nombre:{//NOMBRE DEL EQUIPO
             type:String,
             require:true,
             minleght:3

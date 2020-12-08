@@ -1,15 +1,14 @@
 const mongoose=require('mongoose');
 var Schema = mongoose.Schema;
-const Equipo=mongoose.model('Equipo');
-const Esport=mongoose.model('Esport');
-mongoose.model('EquipoEsport',{
-    IdEquipo:{
+
+mongoose.model('EquipoEsport',{//CREACION DEL MODELO EQUIPO ESPORT
+    IdEquipo:{//ID QUE REFERENCIA EL ESQUEMA EQUIPO
         type:  Schema.Types.ObjectId, 
         ref: "Equipo", 
         require:true
       
     },
-    IdEsport:{ 
+    IdEsport:{ //ID QUE REFERENCIA EL ESQUEMA ESPORT
         type:  Schema.Types.ObjectId, 
         ref: "Esport", 
         require:true

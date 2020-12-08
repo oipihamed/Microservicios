@@ -7,7 +7,7 @@ require('../models/Esport');
 const Esport=mongoose.model('Esport');
 
 router.get('/',(req, res)=> {
-    //res.send('Metodo que lista los Esports');
+    //Metodo que lista los Esports;
      Esport.find().then((esports)=>{
        res.json(esports);
      }).catch((error)=>{
@@ -17,10 +17,10 @@ router.get('/',(req, res)=> {
    });
    //Encuentra un Esport especifico
    router.get('/:idEsport',(req, res)=> {
-     //res.send('Encuentra un Esport'+req.params.idEsport);
+     
      let IdEsport=req.params.idEsport;
      
-     Esport.find({IdEsport}).then((esport)=>{
+     Esport.find({IdEsport}).then((esport)=>{//SE DEVUELVE UN ESPORT ESPECIFICO POR EL ID
      res.json(esport);
     }).catch((error)=>{
       if(error)
@@ -30,8 +30,8 @@ router.get('/',(req, res)=> {
    });
    //Registro de datos
    router.post('/',(req, res)=> {
-     //res.json(req.body);
-     var newEsport={
+    
+     var newEsport={//SE CREA EL NUEVO ESPORT
        IdEsport:req.body.IdEsport,
        Nombre:req.body.Nombre,
        FechaInicio:req.body.FechaInicio,
@@ -45,7 +45,7 @@ router.get('/',(req, res)=> {
        
       console.log(esports);
      
-       if (esports==null){
+       if (esports==null){//SI NO EXISTE EL ESPORT SE REALIZA EL REGISTRO
         edeporte.save().then(()=>{
           console.log("El nuevo Esport se ha creado");
           res.send("Un nuevo Esport ha sido creado");
@@ -55,32 +55,31 @@ router.get('/',(req, res)=> {
             throw error;
           }
         });
-        }else{
-         console.log("El  sport ya existe");
+        }else{//SI ESPORTS TIENE UN REGISTRO SE ENVIA UN MENSAJE
+         console.log("El  Esport ya existe");
           res.send("El Esport ya existe");
         }
       });
      
+    
      
-     
-     //Anterior
+  
     
    });
    //Actualizasion de registros
    router.put('/',(req, res)=> {
-     //res.send('Modifica el registro de un Esport');
-     Esport.findOne({IdEsport:req.body.IdEsport}).then((esports)=>{
+     Esport.findOne({IdEsport:req.body.IdEsport}).then((esports)=>{//SE REALIZA LA BUSQUEDA DEL ESPORT
        
       esports.FechaInicio=req.body.FechaInicio;
       esports.FechaFin=req.body.FechaFin;
       esports.Premio=req.body.Premio;
        
-       //Solamente modificamos el nombre y apellidos
+       //SE MODIFICA LA FECHA INICIO, FIN Y EL PREMIO
        esports.markModified('FechaInicio');
        esports.markModified('FechaFin');
        esports.markModified('Premio');
    
-       esports.save().then(()=>{
+       esports.save().then(()=>{//SE GUARDA LA ACTUALIZACION EN LA BD
          res.send("El Esport ha sido modificado existosamente");
    
        }).catch((error)=>{
@@ -92,8 +91,7 @@ router.get('/',(req, res)=> {
    });
    //Eliminar registros
    router.delete('/:idEsport',(req, res)=> {
-     //res.send('Eliminando un registro '+req.params.numerocontrol);
-     Esport.findOneAndRemove({IdEsport:req.params.idEsport}).then(()=>{
+     Esport.findOneAndRemove({IdEsport:req.params.idEsport}).then(()=>{//sE BUSCA UN REGISTRO ESPECIFICO Y SE ELIMINA
        res.send("El Esport se ha eliminado exitosamente");
      
      }).catch((error)=>{
