@@ -4,13 +4,13 @@ const Equipo=mongoose.model('Equipo');
 const Esport=mongoose.model('Esport');
 mongoose.model('EquipoEsport',{
     IdEquipo:{
-        type:  Schema.ObjectId, 
+        type:  Schema.Types.ObjectId, 
         ref: "Equipo", 
-        require:true,
+        require:true
       
     },
     IdEsport:{ 
-        type:  Schema.ObjectId, 
+        type:  Schema.Types.ObjectId, 
         ref: "Esport", 
         require:true
     },

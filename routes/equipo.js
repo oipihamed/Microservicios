@@ -39,17 +39,29 @@ router.get('/',(req, res)=> {
        Region:req.body.Region,
        NumeroJugadores:req.body.NumeroJugadores
      }
+     IdEquipo=req.body.IdEquipo;
     //Equipo ES EL MODELO Y LE PASAMOS LOS DATOS
      var team=new Equipo(newEquipo);
-     team.save().then(()=>{
-       console.log("El nuevo Equipo se ha creado");
-       res.send("Un nuevo Equipo ha sido creado");
-     }).catch((error)=>{
-       if(error){
-         console.log("Un error ha ocurrido al agregar un Equipo");
-         throw error;
+     Equipo.findOne({IdEquipo}).then((equipos)=>{
+       
+     console.log(equipos);
+    
+      if (equipos==null){
+        team.save().then(()=>{
+          console.log("El nuevo Equipo se ha creado");
+          res.send("Un nuevo Equipo ha sido creado");
+        }).catch((error)=>{
+          if(error){
+            console.log("Un error ha ocurrido al agregar un Equipo");
+            throw error;
+          }
+        });
+       }else{
+        console.log("El equipo ya existe");
+         res.send("El equipo ya existe");
        }
      });
+     
    });
    //Actualizasion de registros
    router.put('/',(req, res)=> {

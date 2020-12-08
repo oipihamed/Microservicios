@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
+
 //Conectando con la base de datos
 var mongoose=require("mongoose");
 require('../models/Esport');
 const Esport=mongoose.model('Esport');
-
 
 router.get('/',(req, res)=> {
     //res.send('Metodo que lista los Esports');
@@ -19,7 +19,6 @@ router.get('/',(req, res)=> {
    router.get('/:idEsport',(req, res)=> {
      //res.send('Encuentra un Esport'+req.params.idEsport);
      let IdEsport=req.params.idEsport;
-   
      
      Esport.find({IdEsport}).then((esport)=>{
      res.json(esport);
@@ -41,15 +40,31 @@ router.get('/',(req, res)=> {
      }
     //Esport ES EL MODELO Y LE PASAMOS LOS DATOS
      var edeporte=new Esport(newEsport);
-     edeporte.save().then(()=>{
-       console.log("El nuevo Esport se ha creado");
-       res.send("Un nuevo Esport ha sido creado");
-     }).catch((error)=>{
-       if(error){
-         console.log("Un error ha ocurrido al agregar un Esport");
-         throw error;
-       }
-     });
+     IdEsport=req.body.IdEsport
+     Esport.findOne({IdEsport}).then((esports)=>{
+       
+      console.log(esports);
+     
+       if (esports==null){
+        edeporte.save().then(()=>{
+          console.log("El nuevo Esport se ha creado");
+          res.send("Un nuevo Esport ha sido creado");
+        }).catch((error)=>{
+          if(error){
+            console.log("Un error ha ocurrido al agregar un Esport");
+            throw error;
+          }
+        });
+        }else{
+         console.log("El  sport ya existe");
+          res.send("El Esport ya existe");
+        }
+      });
+     
+     
+     
+     //Anterior
+    
    });
    //Actualizasion de registros
    router.put('/',(req, res)=> {
