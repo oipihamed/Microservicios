@@ -43,7 +43,7 @@ const Equipo=mongoose.model('Equipo');
    
       }
      });
- 
+
 
    registro.save().then(()=>{//SE GUARDA EL REGISTRO EN LA BD
      console.log("Se ha matriculado");
